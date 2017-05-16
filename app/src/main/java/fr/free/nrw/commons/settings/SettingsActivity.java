@@ -3,14 +3,13 @@ package fr.free.nrw.commons.settings;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.MenuItem;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.utils.CommonsAppSharedPref;
 
 public class SettingsActivity extends NavigationBaseActivity {
     private SettingsFragment settingsFragment;
@@ -20,7 +19,7 @@ public class SettingsActivity extends NavigationBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Check prefs on every activity starts
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme",true)) {
+        if (CommonsAppSharedPref.getInstance().getPreferenceBoolean("theme", true)) {
             setTheme(R.style.DarkAppTheme);
         } else {
             setTheme(R.style.LightAppTheme);
