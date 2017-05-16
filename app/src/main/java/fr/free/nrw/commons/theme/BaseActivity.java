@@ -11,6 +11,7 @@ import fr.free.nrw.commons.utils.CommonsAppSharedPref;
 public class BaseActivity extends AppCompatActivity {
     boolean currentTheme;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if(Utils.isDarkTheme(this)){
@@ -26,7 +27,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         // Restart activity if theme is changed
-        boolean newTheme = CommonsAppSharedPref.getInstance(this).getPreferenceBoolean("theme",true);
+        boolean newTheme = CommonsAppSharedPref.getInstance().getPreferenceBoolean("theme", true);
         if(currentTheme!=newTheme){ //is activity theme changed
             Intent intent = getIntent();
             finish();

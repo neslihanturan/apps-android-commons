@@ -23,11 +23,13 @@ import android.widget.AdapterView;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.hamburger.HamburgerMenuContainer;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
@@ -40,7 +42,8 @@ public  class       ContributionsActivity
                     AdapterView.OnItemClickListener,
                     MediaDetailPagerFragment.MediaDetailProvider,
                     FragmentManager.OnBackStackChangedListener,
-                    ContributionsListFragment.SourceRefresher {
+                    ContributionsListFragment.SourceRefresher,
+                    HamburgerMenuContainer {
 
     private Cursor allContributions;
     private ContributionsListFragment contributionsList;
@@ -49,6 +52,7 @@ public  class       ContributionsActivity
     private boolean isUploadServiceConnected;
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
     private String CONTRIBUTION_SELECTION = "";
+
     /*
         This sorts in the following order:
         Currently Uploading
@@ -85,7 +89,7 @@ public  class       ContributionsActivity
     @Override
     protected void onResume() {
         super.onResume();
-        CommonsAppSharedPref sharedPref = CommonsAppSharedPref.getInstance(this);
+        CommonsAppSharedPref sharedPref = CommonsAppSharedPref.getInstance();
         boolean isSettingsChanged =
                 sharedPref.getPreferenceBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,false);
         sharedPref.putPreferenceBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,false);
@@ -116,8 +120,8 @@ public  class       ContributionsActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle(R.string.title_activity_contributions);
         setContentView(R.layout.activity_contributions);
+        ButterKnife.bind(this);
 
         // Activity can call methods in the fragment by acquiring a reference to the Fragment from FragmentManager, using findFragmentById()
         contributionsList = (ContributionsListFragment)getSupportFragmentManager().findFragmentById(R.id.contributionsListFragment);
@@ -133,6 +137,7 @@ public  class       ContributionsActivity
             }
         }
         requestAuthToken();
+        initDrawer();
     }
 
     @Override
@@ -315,5 +320,10 @@ public  class       ContributionsActivity
     @Override
     public void refreshSource() {
         getSupportLoaderManager().restartLoader(0, null, this);
+    }
+
+    public static void startYourself(Context context) {
+        Intent settingsIntent = new Intent(context, ContributionsActivity.class);
+        context.startActivity(settingsIntent);
     }
 }

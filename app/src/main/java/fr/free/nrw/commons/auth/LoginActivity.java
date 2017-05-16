@@ -52,7 +52,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         passwordEdit = (EditText) findViewById(R.id.loginPassword);
         twoFactorEdit = (EditText) findViewById(R.id.loginTwoFactor);
 
-        prefs = CommonsAppSharedPref.getInstance(this);
+        prefs = CommonsAppSharedPref.getInstance();
 
         TextWatcher loginEnabler = newLoginTextWatcher();
         usernameEdit.addTextChangedListener(loginEnabler);
