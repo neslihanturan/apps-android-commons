@@ -49,7 +49,7 @@ public class ContributionController {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         lastGeneratedCaptureUri = reGenerateImageCaptureUriInCache();
 
-        //intent.setFlags doesnt work for API level <20
+        // Intent.setFlags doesnt work for API level <20
         requestWritePermission(fragment.getContext(), takePictureIntent, lastGeneratedCaptureUri);
 
         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, lastGeneratedCaptureUri);
@@ -57,11 +57,13 @@ public class ContributionController {
     }
 
     private static void requestWritePermission(Context context, Intent intent, Uri uri) {
-        
-        List<ResolveInfo> resInfoList = context.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+
+        List<ResolveInfo> resInfoList = context.getPackageManager().queryIntentActivities(intent,
+                PackageManager.MATCH_DEFAULT_ONLY);
         for (ResolveInfo resolveInfo : resInfoList) {
             String packageName = resolveInfo.activityInfo.packageName;
-            context.grantUriPermission(packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            context.grantUriPermission(packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION |
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION);
         }
     }
 
