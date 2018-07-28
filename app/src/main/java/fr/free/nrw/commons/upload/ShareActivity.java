@@ -25,6 +25,7 @@ import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -145,8 +146,6 @@ public class ShareActivity
     private float startScaleFinal;
     private Bundle savedInstanceState;
     private boolean isUploadFinalised = false; // Checks is user clicked to upload button or regret before this phase
-
-
 
     /**
      * Called when user taps the submit button.
