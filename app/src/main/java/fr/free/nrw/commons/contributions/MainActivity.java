@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -119,22 +120,20 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
         // Set custom view to add nearby info icon next to text
         View nearbyTabLinearLayout = LayoutInflater.from(this).inflate(R.layout.custom_nearby_tab_layout, null);
-        View nearbyInfoPopupWindowLayout = LayoutInflater.from(this).inflate(R.layout.nearby_info_popup_layout, null);
         ImageView nearbyInfo = nearbyTabLinearLayout.findViewById(R.id.nearby_info_image);
         tabLayout.getTabAt(1).setCustomView(nearbyTabLinearLayout);
 
         nearbyInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*new AlertDialog.Builder(MainActivity.this)
+                new AlertDialog.Builder(MainActivity.this)
                         .setTitle(R.string.title_activity_nearby)
                         .setMessage(R.string.showcase_view_whole_nearby_activity)
                         .setCancelable(true)
                         .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
                         .create()
-                        .show();*/
-                String popupText = getResources().getString(R.string.showcase_view_whole_nearby_activity);
-                ViewUtil.displayPopupWindow(nearbyInfo, MainActivity.this, nearbyInfoPopupWindowLayout, popupText);
+                        .show();
+
             }
         });
 
