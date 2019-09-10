@@ -169,7 +169,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     FragmentTransaction transaction;
     View view;
 
-    NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
+    public NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
     SupportMapFragment mapFragment;
     boolean isDarkTheme;
     boolean isFabOpen;

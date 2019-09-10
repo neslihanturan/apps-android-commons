@@ -175,7 +175,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                         isContributionsFragmentVisible = false;
                         updateMenuItem();
                         // Do all permission and GPS related tasks on tab selected, not on create
-                        //((NearbyParentFragment)contributionsActivityPagerAdapter.getItem(1)).nearbyParentFragmentPresenter.onTabSelected();
+                        ((NearbyTestLayersFragment)contributionsActivityPagerAdapter.getItem(1)).nearbyParentFragmentPresenter.onTabSelected();
                         break;
                     default:
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
