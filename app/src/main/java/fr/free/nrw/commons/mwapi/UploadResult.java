@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.mwapi;
 
-import org.jetbrains.annotations.NotNull;
-
+import androidx.annotation.NonNull;
 import java.util.Date;
 
 public class UploadResult {
@@ -36,7 +35,7 @@ public class UploadResult {
         this.imageUrl = imageUrl;
     }
 
-    @NotNull
+    @NonNull
     @Override
     public String toString() {
         return "UploadResult{" +
