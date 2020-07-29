@@ -644,7 +644,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     @OnClick(R.id.update_categories_button)
     public void onUpdateCategoriesClicked() {
-       updateCategories(categoryEditSearchRecyclerViewAdapter.getNewCategories());
+        updateCategories(categoryEditSearchRecyclerViewAdapter.getNewCategories());
         displayHideCategorySearch();
     }
 
@@ -654,9 +654,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     public void updateCategories(List<String> selectedCategories) {
-        Single<Boolean> resultSingle =reasonBuilder.getReason(media, null)
-            .flatMap((reason) -> categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories, this));
-        compositeDisposable.add(resultSingle
+        compositeDisposable.add(categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories, this)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(s -> {
